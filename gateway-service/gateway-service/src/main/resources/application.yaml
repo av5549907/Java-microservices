@@ -1,0 +1,45 @@
+Spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+    circuitbreaker:
+      resilience4j:
+        enabled: true
+server:
+  port: 9090
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  info:
+    env:
+      enabled: true
+  endpoint:
+    gateway:
+      enabled: true
+resilience4j:
+    circuitbreaker:
+      configs:
+        default:
+          sliding-window-size: 10
+          permitted-number-of-calls-in-half-open-state: 2
+          failure-rate-threshold: 50
+          wait-duration-in-open-state: 1000
+info:
+  app:
+    name: gateway-service
+    description: this is the gateway service
+    version: "1.0"

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/video-service/video-service/pom.xml" />
+        <option value="$PROJECT_DIR$/course-service/course-service/pom.xml" />
+        <option value="$PROJECT_DIR$/category-service/category-service/pom.xml" />
+        <option value="$PROJECT_DIR$/discovery-service/discovery-service/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway-service/gateway-service/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server/config-server/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK" />
+</project>

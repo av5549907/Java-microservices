@@ -1,0 +1,49 @@
+server:
+  port: 9093
+spring:
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  application:
+    name: video-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: videodb
+  config:
+    import: "optional:configserver:http://localhost:9094/"
+
+video:
+  upload:
+    path: "uploads/videos"
+
+eureka:
+    client:
+       service-url:
+           defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+    endpoint:
+      shutdown:
+        enabled: true
+
+
+info:
+  app:
+    name: "video-service"
+    description:  "This is video service"
+    version: "1.0"

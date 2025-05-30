@@ -1,0 +1,80 @@
+#version: '4.2'
+
+#mysql-services
+services:
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: categorydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user123
+    ports:
+      - "3307:3306"
+    volumes:
+      - "/run/desktop/mnt/host/c/Users/av554/Downloads/Java-microservices/mysql-data:/var/lib/mysql"
+
+  #php myadmin service
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql-db
+    depends_on:
+      - mysql-db
+    networks:
+      - default
+
+
+  #Postgres-DB Service
+  postgres-db:
+    image: postgres:16
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: coursedb
+    ports:
+      - "5432:5432"
+    volumes:
+      - "/run/desktop/mnt/host/c/Users/av554/Downloads/Java-microservices/postgres-data:/var/lib/postgresql"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PMA_HOST: postgres-db
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres-db
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "/run/desktop/mnt/host/c/Users/av554/Downloads/Java-microservices/mongo-data:/var/lib/data/db"
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    ports:
+      - "8083:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      # MONGO_INITDB_DATABASE: videodb
+#      MONGO_INITDB_ROOT_USERNAME: admin
+#      MONGO_INITDB_ROOT_PASSWORD: pass
+    depends_on:
+      - mongo
+volumes:
+  mysql-data:
+  postgres-data:
+  mongo-data:
